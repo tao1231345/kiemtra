@@ -1,0 +1,383 @@
+/* ========================================
+   Mobile Price Analytics - Custom Styles v2
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+#MainMenu { visibility: hidden; }
+footer { visibility: hidden; }
+
+/* Header: ẩn toolbar + decoration */
+[data-testid="stHeader"] { background: transparent; }
+[data-testid="stToolbar"] { display: none; }
+[data-testid="stDecoration"] { display: none; }
+
+/* ===== KHÓA SIDEBAR LUÔN MỞ =====
+   Ẩn mọi nút đóng/mở của sidebar để không còn trường hợp "đóng xong không mở lại được".
+   Menu chức năng luôn hiển thị ở bên trái.
+   Muốn đóng/mở từng khối (CSV, Excel) thì dùng expander trong sidebar. */
+[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapsedControl"],
+button[kind="headerNoPadding"],
+[data-testid="baseButton-headerNoPadding"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* Force sidebar luôn visible, không transform ra khỏi màn hình */
+[data-testid="stSidebar"] {
+    transform: none !important;
+    visibility: visible !important;
+    min-width: 280px !important;
+    max-width: 340px !important;
+    margin-left: 0 !important;
+    left: 0 !important;
+}
+[data-testid="stSidebar"][aria-expanded="false"] {
+    transform: none !important;
+    margin-left: 0 !important;
+    min-width: 280px !important;
+}
+
+/* Nền app với gradient nhẹ cho đỡ trắng trơn */
+[data-testid="stAppViewContainer"] {
+    background:
+        radial-gradient(1200px 600px at 90% -10%, rgba(139, 92, 246, 0.08), transparent 60%),
+        radial-gradient(900px 500px at -10% 10%, rgba(99, 102, 241, 0.08), transparent 60%),
+        linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.main .block-container {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    max-width: 1400px;
+}
+
+/* ============ HEADER ============ */
+.app-header {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+    padding: 2.25rem 2.5rem;
+    border-radius: 18px;
+    color: white;
+    margin-bottom: 2rem;
+    box-shadow: 0 18px 40px rgba(99, 102, 241, 0.28);
+    position: relative;
+    overflow: hidden;
+}
+.app-header::before {
+    content: "";
+    position: absolute;
+    inset: -40% -20% auto auto;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 60%);
+    filter: blur(10px);
+    pointer-events: none;
+}
+.app-header h1 {
+    color: white !important;
+    font-size: 2.5rem !important;
+    font-weight: 800 !important;
+    margin: 0 !important;
+    letter-spacing: -0.02em;
+    position: relative;
+}
+.app-header p {
+    color: rgba(255, 255, 255, 0.92) !important;
+    font-size: 1.1rem !important;
+    margin-top: 0.5rem !important;
+    font-weight: 400;
+    position: relative;
+}
+
+/* ============ KPI CARDS ============ */
+.kpi-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+    transition: all 0.25s ease;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.kpi-card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+.kpi-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 32px rgba(99, 102, 241, 0.12);
+    border-color: #c7d2fe;
+}
+.kpi-card:hover::after { opacity: 1; }
+.kpi-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.kpi-label {
+    font-size: 0.8rem; color: #64748b; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;
+}
+.kpi-value {
+    font-size: 2rem; font-weight: 800; color: #0f172a;
+    margin: 0; line-height: 1.2;
+}
+.kpi-delta {
+    font-size: 0.85rem; color: #10b981; font-weight: 600; margin-top: 0.25rem;
+}
+.kpi-delta.negative { color: #ef4444; }
+
+/* ============ SECTION HEADERS ============ */
+.section-header {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 2rem; margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #f1f5f9;
+    position: relative;
+}
+.section-header::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, #6366f1, #ec4899);
+    border-radius: 2px;
+}
+.section-header h2 {
+    font-size: 1.5rem !important; font-weight: 700 !important;
+    color: #0f172a !important; margin: 0 !important;
+}
+.section-header .emoji { font-size: 1.75rem; }
+
+/* ============ INFO BOXES ============ */
+.info-box, .success-box, .warning-box {
+    padding: 1rem 1.25rem; border-radius: 10px; margin: 1rem 0;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+.info-box {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-left: 4px solid #3b82f6; color: #1e40af;
+}
+.success-box {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border-left: 4px solid #10b981; color: #065f46;
+}
+.warning-box {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-left: 4px solid #f59e0b; color: #92400e;
+}
+
+/* ============ SIDEBAR ============ */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    border-right: 1px solid #e2e8f0;
+    box-shadow: 2px 0 10px rgba(15, 23, 42, 0.03);
+}
+[data-testid="stSidebar"] > div:first-child {
+    padding-top: 0.5rem;
+}
+
+.sidebar-brand {
+    text-align: center; padding: 1.25rem 1rem 1rem;
+    border-bottom: 1px solid #e2e8f0; margin-bottom: 0.5rem;
+}
+.sidebar-brand h2 {
+    font-size: 1.5rem !important; font-weight: 800 !important;
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin: 0 !important;
+    letter-spacing: -0.02em;
+}
+.sidebar-brand p {
+    font-size: 0.85rem; color: #64748b; margin-top: 0.25rem;
+}
+
+/* option_menu container */
+[data-testid="stSidebar"] .nav {
+    background: transparent !important;
+}
+
+/* ============ FILE UPLOADER ============ */
+[data-testid="stFileUploader"] section {
+    background: linear-gradient(180deg, #f8fafc, #eef2ff);
+    border: 2px dashed #c7d2fe;
+    border-radius: 12px;
+    padding: 1rem;
+    transition: all 0.2s ease;
+}
+[data-testid="stFileUploader"] section:hover {
+    border-color: #6366f1;
+    background: linear-gradient(180deg, #eef2ff, #e0e7ff);
+}
+[data-testid="stFileUploader"] button {
+    background: white !important;
+    color: #6366f1 !important;
+    border: 1px solid #c7d2fe !important;
+    box-shadow: none !important;
+    font-weight: 600 !important;
+}
+[data-testid="stFileUploader"] button:hover {
+    background: #6366f1 !important;
+    color: white !important;
+}
+
+/* ============ EXPANDER ============ */
+[data-testid="stExpander"] {
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+    transition: all 0.2s ease;
+    margin-bottom: 0.5rem;
+}
+[data-testid="stExpander"]:hover {
+    border-color: #c7d2fe;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.08);
+}
+[data-testid="stExpander"] summary {
+    font-weight: 600;
+    color: #1e293b;
+    padding: 0.75rem 1rem;
+}
+[data-testid="stExpander"] summary:hover {
+    color: #6366f1;
+}
+
+/* ============ BUTTONS ============ */
+.stButton > button,
+.stDownloadButton > button {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white; border: none;
+    padding: 0.6rem 1.5rem; border-radius: 10px;
+    font-weight: 600; font-size: 0.95rem;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.25);
+}
+.stButton > button:hover,
+.stDownloadButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(99, 102, 241, 0.38);
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+}
+.stButton > button:active,
+.stDownloadButton > button:active {
+    transform: translateY(0);
+}
+
+/* Secondary button (ở sidebar) — nhẹ hơn */
+[data-testid="stSidebar"] .stButton > button[kind="secondary"] {
+    background: white;
+    color: #6366f1;
+    border: 1px solid #c7d2fe;
+    box-shadow: none;
+}
+[data-testid="stSidebar"] .stButton > button[kind="secondary"]:hover {
+    background: #eef2ff;
+    transform: none;
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.15);
+}
+
+/* ============ METRIC ============ */
+[data-testid="stMetric"] {
+    background: white; padding: 1.2rem; border-radius: 14px;
+    border: 1px solid #e2e8f0; box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+    transition: all 0.2s ease;
+}
+[data-testid="stMetric"]:hover {
+    border-color: #c7d2fe;
+    box-shadow: 0 8px 16px rgba(99, 102, 241, 0.08);
+}
+[data-testid="stMetricLabel"] { font-weight: 600 !important; color: #64748b !important; }
+[data-testid="stMetricValue"] { font-weight: 800 !important; color: #0f172a !important; }
+
+/* ============ DATAFRAME ============ */
+[data-testid="stDataFrame"] {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+/* ============ TABS ============ */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 0.5rem; background: #f1f5f9; padding: 0.4rem; border-radius: 12px;
+}
+.stTabs [data-baseweb="tab"] {
+    height: 42px; padding: 0 1.5rem; border-radius: 9px;
+    color: #64748b; font-weight: 600; background: transparent; border: none;
+    transition: all 0.2s ease;
+}
+.stTabs [data-baseweb="tab"]:hover { background: white; color: #1e293b; }
+.stTabs [aria-selected="true"] {
+    background: white !important; color: #6366f1 !important;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+}
+
+/* ============ FORM LABELS ============ */
+.stSelectbox label, .stSlider label, .stNumberInput label,
+.stRadio label, .stMultiSelect label, .stTextInput label {
+    font-weight: 600 !important; color: #374151 !important;
+}
+
+/* Caption nhỏ gọn, màu dịu */
+.stCaption, [data-testid="stCaptionContainer"] {
+    color: #64748b !important;
+    font-size: 0.82rem !important;
+}
+
+/* ============ PREDICT RESULT ============ */
+.predict-result {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    padding: 2rem; border-radius: 18px; text-align: center; color: white;
+    margin: 1.5rem 0; box-shadow: 0 14px 30px rgba(16, 185, 129, 0.32);
+    position: relative;
+    overflow: hidden;
+}
+.predict-result::before {
+    content: "";
+    position: absolute;
+    inset: -40% -20% auto auto;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.3), transparent 60%);
+    pointer-events: none;
+}
+.predict-result .label {
+    font-size: 1rem; opacity: 0.95;
+    text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;
+    position: relative;
+}
+.predict-result .value {
+    font-size: 3.5rem; font-weight: 800; margin: 0.5rem 0; line-height: 1;
+    position: relative;
+}
+.predict-result .unit {
+    font-size: 1.5rem; font-weight: 500; opacity: 0.92;
+    position: relative;
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeInUp 0.5s ease-out; }
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #c7d2fe, #a5b4fc);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #a5b4fc, #818cf8);
+}

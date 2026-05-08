@@ -1,0 +1,21 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.venv/
+
+# Tooling
+.claude/
+.streamlit/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Local outputs
+outputs/models/
+outputs/figures/
